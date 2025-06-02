@@ -26,11 +26,29 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
+        'mailService' => [
+            'class' => 'app\services\MailService',
+            'fromEmail' => 'rkuzurgaliev@schooltech.ru', // этот адрес должен совпадать с SMTP-логином
+        ],
         'mailer' => [
-            'class' => \yii\symfonymailer\Mailer::class,
+            'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@app/mail',
-            // send all mails to a file by default.
-            'useFileTransport' => true,
+            'useFileTransport' => false, // false — чтобы письма реально отправлялись
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'rkuzurgaliev@schooltech.ru', // полный email
+                'password' => 'Pass123$45', // пароль или пароль приложения
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
+        ],
+
+        'apiService' => [
+            'class' => 'app\services\ApiService',
+            'baseUrl' => 'https://172.16.0.94/olymp_notification/web/',
+            'timeout' => 60, // опционально
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
