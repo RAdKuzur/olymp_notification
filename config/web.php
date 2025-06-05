@@ -31,6 +31,12 @@ $config = [
             'class' => 'app\services\MailService',
             'fromEmail' => 'rkuzurgaliev@schooltech.ru', // этот адрес должен совпадать с SMTP-логином
         ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => '172.16.0.94',
+            'port' => 6379,
+            'database' => 0,
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@app/mail',

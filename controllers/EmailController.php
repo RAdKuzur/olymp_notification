@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\CheckHelper;
 use app\components\CodeHelper;
+use app\components\RedisComponent;
 use app\services\MailService;
 use app\services\ApiService;
 use Yii;
@@ -35,6 +36,7 @@ class EmailController extends Controller
                 'code',
                 ['code' => $code]
             );
+            RedisComponent::set($email, $code);
             return \Yii::$app->response->data = json_encode(['status' => 200, 'code' => $code]);
         }
         return \Yii::$app->response->data = json_encode(['status' => 404]);

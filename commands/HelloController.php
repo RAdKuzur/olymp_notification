@@ -7,6 +7,7 @@
 
 namespace app\commands;
 
+use app\components\RedisComponent;
 use yii\console\Controller;
 use yii\console\ExitCode;
 
@@ -30,5 +31,8 @@ class HelloController extends Controller
         echo $message . "\n";
 
         return ExitCode::OK;
+    }
+    public function actionTest(){
+       RedisComponent::set('email', 123213);
     }
 }

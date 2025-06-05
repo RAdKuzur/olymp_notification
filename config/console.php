@@ -17,6 +17,12 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'redis' => [ // Добавьте Redis-компонент
+            'class' => 'yii\redis\Connection',
+            'hostname' => '172.16.0.94',
+            'port' => 6379,
+            'database' => 0,
+        ],
         'log' => [
             'targets' => [
                 [
