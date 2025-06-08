@@ -25,7 +25,20 @@ class PhoneNumberController extends Controller
         parent::__construct($id, $module, $config);
     }
 
-    public function actionSendCode()
+    public function actionSendTelegramCode()
+    {
+        $code = CodeHelper::generateCode();
+        $requestToken = Yii::$app->request->headers->get('requestToken');
+        $phoneNumber =  Yii::$app->request->headers->get('phone_number');
+        if (CheckHelper::chechAccess($requestToken)) {
+            $model = PhoneVisit::fill($phoneNumber, MessageDictionary::CODE_MESSAGE, $code, 'default code message text');
+            $this->phoneVisitRepository->save($model);
+            //место для вызова PhoneNumberService
+            return \Yii::$app->response->data = json_encode(['status' => 200, 'code' => $code]);
+        }
+        return \Yii::$app->response->data = json_encode(['status' => 404]);
+    }
+    public function actionSendWhatsappCode()
     {
         $code = CodeHelper::generateCode();
         $requestToken = Yii::$app->request->headers->get('requestToken');
