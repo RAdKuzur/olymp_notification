@@ -35,7 +35,7 @@ class EmailController extends Controller
         $code = CodeHelper::generateCode();
         $requestToken = Yii::$app->request->headers->get('requestToken');
         $email =  Yii::$app->request->headers->get('email');
-        if (CheckHelper::chechAccess($requestToken)) {
+        if (CheckHelper::checkAccess($requestToken)) {
             $this->mailService->send(
                 $email,
                 'Тема сообщения',

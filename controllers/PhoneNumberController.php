@@ -30,7 +30,7 @@ class PhoneNumberController extends Controller
         $code = CodeHelper::generateCode();
         $requestToken = Yii::$app->request->headers->get('requestToken');
         $phoneNumber =  Yii::$app->request->headers->get('phone_number');
-        if (CheckHelper::chechAccess($requestToken)) {
+        if (CheckHelper::checkAccess($requestToken)) {
             $model = PhoneVisit::fill($phoneNumber, MessageDictionary::CODE_MESSAGE, $code, 'default code message text');
             $this->phoneVisitRepository->save($model);
             //место для вызова PhoneNumberService
@@ -43,7 +43,7 @@ class PhoneNumberController extends Controller
         $code = CodeHelper::generateCode();
         $requestToken = Yii::$app->request->headers->get('requestToken');
         $phoneNumber =  Yii::$app->request->headers->get('phone_number');
-        if (CheckHelper::chechAccess($requestToken)) {
+        if (CheckHelper::checkAccess($requestToken)) {
             $model = PhoneVisit::fill($phoneNumber, MessageDictionary::CODE_MESSAGE, $code, 'default code message text');
             $this->phoneVisitRepository->save($model);
             //место для вызова PhoneNumberService

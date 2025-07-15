@@ -6,7 +6,7 @@ use Yii;
 
 class CheckHelper
 {
-    public static function chechAccess($appToken)
+    public static function checkAccess($appToken)
     {
         return $appToken == Yii::$app->params['requestToken'];
     }
